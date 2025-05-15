@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Privacy Policy - Tokime</title>
+    <style>
+      :root {
+        --primary-color: #5d7599;
+        --secondary-color: #5d7599;
+        --background-color: #1a1a1a;
+        --card-background: #1e2430;
+        --text-color: #d8d8d8;
+        --text-secondary: #9eb8de;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Helvetica, Arial, sans-serif;
+        background-color: var(--background-color);
+        color: var(--text-color);
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--primary-color);
+      }
+
+      .logo img {
+        width: 32px;
+        height: 32px;
+        margin-right: 10px;
+      }
+
+      .card {
+        background-color: var(--card-background);
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      h1 {
+        font-size: 32px;
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: var(--text-secondary);
+      }
+
+      h2 {
+        font-size: 24px;
+        color: var(--secondary-color);
+        margin-top: 30px;
+        margin-bottom: 15px;
+      }
+
+      p {
+        margin-bottom: 16px;
+        font-size: 16px;
+        color: var(--text-color);
+      }
+
+      .highlight {
+        padding: 20px;
+        background-color: rgba(93, 117, 153, 0.1);
+        border-left: 4px solid var(--primary-color);
+        border-radius: 5px;
+        margin: 25px 0;
+      }
+
+      .footer {
+        text-align: center;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.2);
+        color: var(--text-secondary);
+        font-size: 14px;
+        margin-top: 40px;
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        color: var(--secondary-color);
+        text-decoration: none;
+        margin-top: 20px;
+        transition: color 0.2s ease;
+      }
+
+      .back-link:hover {
+        color: var(--text-color);
+      }
+
+      .back-link svg {
+        margin-right: 8px;
+        width: 20px;
+        height: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          padding: 20px;
+        }
+
+        h1 {
+          font-size: 28px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="logo">
+          <img src="icons/favicon.png" alt="Tokime Logo" />
+          Tokime
+        </div>
+      </div>
+
+      <div class="card">
+        <h1>Privacy Policy</h1>
+
+        <div class="highlight">
+          <p>
+            <strong>Summary:</strong> Tokime does not collect, transmit, or store any of your data on servers. All data is stored locally on your device, and never leaves your browser.
+          </p>
+        </div>
+
+        <h2>Local Storage Only</h2>
+        <p>
+          All data in Tokime (including stopwatch information and timing records) is stored exclusively in your browser's local storage. This data never leaves your device and is not accessible to us or any third parties.
+        </p>
+
+        <h2>No Data Collection</h2>
+        <p>
+          We do not collect any personal information, usage statistics, or any other data from you. Tokime functions completely offline and does not communicate with any external servers.
+        </p>
+
+        <h2>No Third-Party Services</h2>
+        <p>
+          Tokime does not use any third-party services, analytics tools, or tracking mechanisms. There are no external connections made by the extension.
+        </p>
+
+        <h2>Your Data Control</h2>
+        <p>
+          Since all data is stored locally in your browser, you have complete control over it. You can clear all Tokime data at any time by using the Clear Data option in the extension settings or by clearing your browser data.
+        </p>
+      </div>
+
+      <a href="popup.html" class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back to App
+      </a>
+    </div>
+
+    <div class="footer">
+      <p>© 2024 Tokime Extension. All rights reserved.</p>
+    </div>
+  </body>
+</html>
