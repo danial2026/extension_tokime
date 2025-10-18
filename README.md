@@ -8,6 +8,7 @@ A browser extension for time tracking with simple stopwatches. All data stays on
 - Create multiple stopwatches to track time for different tasks
 - Start and stop time tracking with a single click
 - View detailed session history for each stopwatch
+- Manually add, edit, and delete sessions with custom titles and timestamps
 - Export/import your data for backup and transfer
 
 ## Privacy First
