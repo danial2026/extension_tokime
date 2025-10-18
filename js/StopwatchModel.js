@@ -37,7 +37,7 @@ export class StopwatchModel {
 
   // check if there's a session with no end time
   isRunning() {
-    return this.sessions.some(session => !session.end);
+    return this.sessions.some((session) => !session.end);
   }
 
   // add a new timing session
@@ -51,16 +51,51 @@ export class StopwatchModel {
       id: generateUniqueId("ses_"),
       start: Date.now(),
       end: null,
-      stopwatchId: this.id
+      title: "",
+      stopwatchId: this.id,
     };
 
     this.sessions.push(newSession);
     return newSession;
   }
 
+  // manually add a session with custom times
+  addManualSession(sessionData) {
+    const newSession = {
+      id: generateUniqueId("ses_"),
+      start: sessionData.start || Date.now(),
+      end: sessionData.end || null,
+      title: sessionData.title || "",
+      stopwatchId: this.id,
+    };
+
+    this.sessions.push(newSession);
+    return newSession;
+  }
+
+  // update an existing session
+  updateSession(sessionId, updates) {
+    const sessionIndex = this.sessions.findIndex(
+      (session) => session.id === sessionId
+    );
+    if (sessionIndex === -1) {
+      return null;
+    }
+
+    // Update the session with new data
+    this.sessions[sessionIndex] = {
+      ...this.sessions[sessionIndex],
+      ...updates,
+    };
+
+    return this.sessions[sessionIndex];
+  }
+
   // end the current session
   stopSession() {
-    const activeSessionIndex = this.sessions.findIndex(session => !session.end);
+    const activeSessionIndex = this.sessions.findIndex(
+      (session) => !session.end
+    );
     if (activeSessionIndex === -1) {
       return null;
     }
@@ -72,7 +107,7 @@ export class StopwatchModel {
   // remove a session completely
   deleteSession(sessionId) {
     const initialLength = this.sessions.length;
-    this.sessions = this.sessions.filter(session => session.id !== sessionId);
+    this.sessions = this.sessions.filter((session) => session.id !== sessionId);
     return this.sessions.length !== initialLength;
   }
 
@@ -82,7 +117,7 @@ export class StopwatchModel {
       id: this.id,
       title: this.title,
       createdAt: this.createdAt,
-      sessions: this.sessions
+      sessions: this.sessions,
     };
   }
 }
@@ -95,10 +130,10 @@ export function formatDuration(duration) {
   const seconds = totalSeconds % 60;
 
   return [
-    hours.toString().padStart(2, '0'),
-    minutes.toString().padStart(2, '0'),
-    seconds.toString().padStart(2, '0')
-  ].join(':');
+    hours.toString().padStart(2, "0"),
+    minutes.toString().padStart(2, "0"),
+    seconds.toString().padStart(2, "0"),
+  ].join(":");
 }
 
 // handles loading/saving/crud operations
@@ -113,16 +148,16 @@ export class StopwatchManager {
     try {
       const data = await loadFromStorage([STORAGE_KEY]);
       const rawStopwatches = data[STORAGE_KEY] || [];
-      
+
       this.stopwatches = rawStopwatches.map(
-        stopwatchData => new StopwatchModel(stopwatchData)
+        (stopwatchData) => new StopwatchModel(stopwatchData)
       );
-      
+
       this.loaded = true;
       return this.stopwatches;
     } catch (error) {
       // something went wrong, return empty list
-      console.error('Failed to load stopwatches:', error);
+      console.error("Failed to load stopwatches:", error);
       this.stopwatches = [];
       this.loaded = true;
       return [];
@@ -132,11 +167,11 @@ export class StopwatchManager {
   // save 'em to storage
   async saveStopwatches() {
     try {
-      const stopwatchesData = this.stopwatches.map(sw => sw.toJSON());
+      const stopwatchesData = this.stopwatches.map((sw) => sw.toJSON());
       await saveToStorage({ [STORAGE_KEY]: stopwatchesData });
     } catch (error) {
       // TODO: add proper error handling here later
-      console.error('Failed to save stopwatches:', error);
+      console.error("Failed to save stopwatches:", error);
     }
   }
 
@@ -158,23 +193,23 @@ export class StopwatchManager {
       await this.loadStopwatches();
     }
 
-    return this.stopwatches.find(sw => sw.id === id) || null;
+    return this.stopwatches.find((sw) => sw.id === id) || null;
   }
 
-  // remove one 
+  // remove one
   async deleteStopwatch(id) {
     if (!this.loaded) {
       await this.loadStopwatches();
     }
 
     const initialLength = this.stopwatches.length;
-    this.stopwatches = this.stopwatches.filter(sw => sw.id !== id);
-    
+    this.stopwatches = this.stopwatches.filter((sw) => sw.id !== id);
+
     if (this.stopwatches.length !== initialLength) {
       await this.saveStopwatches();
       return true;
     }
-    
+
     return false;
   }
 
@@ -184,13 +219,13 @@ export class StopwatchManager {
       await this.loadStopwatches();
     }
 
-    const index = this.stopwatches.findIndex(sw => sw.id === id);
+    const index = this.stopwatches.findIndex((sw) => sw.id === id);
     if (index === -1) {
       return null;
     }
 
     // just update the fields we got
-    Object.keys(data).forEach(key => {
+    Object.keys(data).forEach((key) => {
       this.stopwatches[index][key] = data[key];
     });
 
@@ -213,7 +248,7 @@ export class StopwatchManager {
       await this.loadStopwatches();
     }
 
-    const stopwatch = this.stopwatches.find(sw => sw.id === id);
+    const stopwatch = this.stopwatches.find((sw) => sw.id === id);
     if (!stopwatch) {
       return null;
     }
@@ -233,7 +268,7 @@ export class StopwatchManager {
       await this.loadStopwatches();
     }
 
-    const stopwatch = this.stopwatches.find(sw => sw.id === id);
+    const stopwatch = this.stopwatches.find((sw) => sw.id === id);
     if (!stopwatch) {
       return null;
     }
@@ -253,6 +288,6 @@ export class StopwatchManager {
       await this.loadStopwatches();
     }
 
-    return this.stopwatches.filter(sw => sw.isRunning());
+    return this.stopwatches.filter((sw) => sw.isRunning());
   }
-} 
+}
